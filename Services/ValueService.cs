@@ -29,9 +29,9 @@ namespace dotnet_core_template.Services
             return this.repository.Insert(value);
         }
         
-        public Value Update(long id, Value value)
+        public void Update(long id, Value value)
         {
-            return this.repository.Update(value);
+            this.repository.Update(value);
         }
         
         public void Remove(long id)

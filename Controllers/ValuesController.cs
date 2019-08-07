@@ -14,71 +14,72 @@ namespace dotnet_core_template.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly ValueService valueService;
-        
+
         public ValuesController(ValueService valueService)
         {
             this.valueService = valueService;
         }
-        
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Value>> Get() => valueService.GetAll();
+        public ActionResult<IEnumerable<Value>> Get() => valueService.Get();
 
         // GET api/values/5
         [HttpGet("{id}", Name = "GetValue")]
-        public ActionResult<Value> Get(int id)
+        public ActionResult<Value> Get(long id)
         {
             var value = valueService.Get(id);
-            
+
             if (value == null)
             {
                 return NotFound();
             }
-            
+
             return value;
-            
+
         }
 
         // POST api/values
         [HttpPost]
         public ActionResult<Value> Create([FromBody] ValueRequest request)
         {
-            var value = valueService.Create(new Value {
+            var value = valueService.Create(new Value
+            {
                 Titulo = request.Titulo
             });
-            
-            return CreatedAtRoute("GetValue", new { id = value.Id.ToString()}, value);
+
+            return CreatedAtRoute("GetValue", new { id = value.Id.ToString() }, value);
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] ValueRequest request)
+        public IActionResult Update(long id, [FromBody] ValueRequest request)
         {
             Value value = valueService.Get(id);
-            
+
             if (value == null)
             {
                 return NotFound();
             }
-            
+
             valueService.Update(id, value);
-            
+
             return NoContent();
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(long id)
         {
             var value = valueService.Get(id);
-            
+
             if (value == null)
             {
                 return NotFound();
             }
-            
+
             valueService.Remove(value.Id);
-            
+
             return NoContent();
         }
     }
