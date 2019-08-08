@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using dotnet_core_template.Models;
-using dotnet_core_template.Repository;
+using dotnet_core_template.Repositories;
 
 namespace dotnet_core_template.Services
 {

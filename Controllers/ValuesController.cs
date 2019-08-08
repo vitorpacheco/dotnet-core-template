@@ -22,11 +22,11 @@ namespace dotnet_core_template.Controllers
 
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Value>> Get() => valueService.Get();
+        public ActionResult<IEnumerable<ValueResponse>> Get() => valueService.Get().Select(v => new ValueResponse(v)).ToList();
 
         // GET api/values/5
         [HttpGet("{id}", Name = "GetValue")]
-        public ActionResult<Value> Get(long id)
+        public ActionResult<ValueResponse> Get(long id)
         {
             var value = valueService.Get(id);
 
@@ -35,20 +35,20 @@ namespace dotnet_core_template.Controllers
                 return NotFound();
             }
 
-            return value;
+            return new ValueResponse(value);
 
         }
 
         // POST api/values
         [HttpPost]
-        public ActionResult<Value> Create([FromBody] ValueRequest request)
+        public ActionResult<ValueResponse> Create([FromBody] ValueRequest request)
         {
             var value = valueService.Create(new Value
             {
                 Titulo = request.Titulo
             });
 
-            return CreatedAtRoute("GetValue", new { id = value.Id.ToString() }, value);
+            return CreatedAtRoute("GetValue", new { id = value.Id.ToString() }, new ValueResponse(value));
         }
 
         // PUT api/values/5

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using dotnet_core_template.Configurations;
 using dotnet_core_template.Models;
 
-namespace dotnet_core_template.Repository
+namespace dotnet_core_template.Repositories
 {
     public class ValueRepository
     {

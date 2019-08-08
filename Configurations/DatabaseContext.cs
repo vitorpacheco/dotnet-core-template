@@ -3,7 +3,7 @@ using dotnet_core_template.Models;
 using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace dotnet_core_template.Repository
+namespace dotnet_core_template.Configurations
 {
     public class DatabaseContext : DbContext
     {
@@ -11,13 +11,6 @@ namespace dotnet_core_template.Repository
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
-            Console.WriteLine("Contexto criado");
-        }
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            Console.WriteLine("Modelo criado");
         }
     }
 
